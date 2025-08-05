@@ -470,7 +470,7 @@ export class Upgrader implements UpgraderInterface {
               this._onStream({ connection, stream: muxedStream, protocol })
             })
             .catch(async err => {
-              connection.log.error('error handling incoming stream id %s - %e', muxedStream.id, err)
+              console.error('error handling incoming stream id %s - %e', muxedStream.id, err)
 
               if (muxedStream.timeline.close == null) {
                 await muxedStream.close({

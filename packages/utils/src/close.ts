@@ -58,6 +58,7 @@ export async function safelyCloseConnectionIfUnused (connection?: Connection, op
   }
 
   try {
+    console.log(`Clonsing connections due to pruning ${connection?.remotePeer}`)
     await connection?.close(options)
   } catch (err: any) {
     connection?.abort(err)

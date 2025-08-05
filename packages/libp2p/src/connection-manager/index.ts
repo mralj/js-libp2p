@@ -404,6 +404,7 @@ export class DefaultConnectionManager implements ConnectionManager, Startable {
       for (const connection of connectionList) {
         tasks.push((async () => {
           try {
+            console.log(`Closing connection to ${connection.remotePeer} because of stop`)
             await connection.close()
           } catch (err) {
             this.log.error(err)
@@ -455,6 +456,7 @@ export class DefaultConnectionManager implements ConnectionManager, Startable {
 
     if (!this.started) {
       // This can happen when we are in the process of shutting down the node
+      console.log(`Closing because not started, ${connection.remotePeer}`)
       await connection.close()
       return
     }
@@ -606,6 +608,7 @@ export class DefaultConnectionManager implements ConnectionManager, Startable {
     await Promise.all(
       connections.map(async connection => {
         try {
+          console.log(`Closing connections to ${peerId} because of peer hangup`)
           await connection.close(options)
         } catch (err: any) {
           connection.abort(err)
